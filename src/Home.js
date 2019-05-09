@@ -1,37 +1,48 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { getPageHits } from './redux/reducers';
 import logo from './logo.svg';
-import './App.css';
 
-function Home() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="/about"
-            rel="noopener noreferrer"
-          >
-            About
-          </a>
-        </p>
-      </header>
-    </div>
-  );
+class Home extends Component {
+  render = () => {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p>
+            Edit <code>src/App.js</code> and save to reload.
+          </p>
+          <p>
+            <a
+              className="App-link"
+              href="https://reactjs.org"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Learn React
+            </a>
+          </p>
+          <p>
+            <Link to='/about'
+              className="App-link"
+            >
+              About
+            </Link>
+          </p>
+          <p>
+            Page hits: {this.props.pageHits}
+          </p>  
+        </header>
+      </div>
+    );
+  }
 }
 
-export default Home;
+const mapStateToProps = state => {
+  return {
+    pageHits: getPageHits(state)
+  }
+};
+
+export default connect(mapStateToProps)(Home);

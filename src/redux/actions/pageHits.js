@@ -1,0 +1,1 @@
+export const countHit = () => dispatch => dispatch({ type: 'COUNT_PAGE_HIT' });
